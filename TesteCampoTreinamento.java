@@ -1,5 +1,8 @@
 package teste;
 
+import java.awt.dnd.DropTargetAdapter;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -8,7 +11,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import net.bytebuddy.dynamic.loading.ClassInjector.UsingInstrumentation.Target;
+
 public class TesteCampoTreinamento {
+
+	
+
+	
+
+
 
 	@Test
 	public void testeTextfield() {
@@ -23,7 +34,7 @@ public class TesteCampoTreinamento {
 	}
 
 	@Test
-	public void DeveinteragirComTextArea() {
+	public void deveinteragirComTextArea() {
 		System.setProperty("webdriver.chrome.driver",
 				"C:\\Users\\Rayane\\Documents\\drivers\\chromeDriver\\chromedriver.exe");
 		ChromeDriver navegador =  new ChromeDriver();
@@ -71,18 +82,53 @@ Assert.assertEquals("meu primeiro teste",navegador.findElement(By.id("elementosF
             combo.selectByIndex(3);
 			navegador.quit();
 	  } 
+	 
+	@Test
 	  
-
-@Test
-
-public void deveVerificarValoresCombo() {
-	  System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\Rayane\\Documents\\drivers\\chromeDriver\\chromedriver.exe");
-	  ChromeDriver navegador =  new ChromeDriver();
-		navegador.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		WebElement element = navegador.findElement(By.id("elementosForm:escolaridade"));
-	    Select combo = new Select(element);
-        combo.getOptions();
+		public void deveVerificarValoresCombo() {
+			  System.setProperty("webdriver.chrome.driver",
+						"C:\\Users\\Rayane\\Documents\\drivers\\chromeDriver\\chromedriver.exe");
+			  ChromeDriver navegador =  new ChromeDriver();
+				navegador.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+				WebElement element = navegador.findElement(By.id("elementosForm:escolaridade"));
+			  Select combo = new Select(element);
+		    List<WebElement> options = combo.getOptions();
+		    Assert.assertEquals(8, options.size());
+		  
+		   
+		    boolean encontrou = false;
+		    for(WebElement option: options) {
+		    	if(option.getText().equals("Mestrado")) {
+		    		encontrou = true;
+		    		break;
+		    		
+		    	}
+		    }
+	      
+		  Assert.assertTrue(encontrou);}
+	
+   @Test
+       
+   public void deveVerificarValoresComboMultiplo() {
+		  System.setProperty("webdriver.chrome.driver",
+					"C:\\Users\\Rayane\\Documents\\drivers\\chromeDriver\\chromedriver.exe");
+		  ChromeDriver navegador =  new ChromeDriver();
+			navegador.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+			WebElement element = navegador.findElement(By.id("elementosForm:esportes"));
+		  Select combo = new Select(element);
+		  combo.deselectByVisibleText("Natacao");
+		  combo.deselectByVisibleText("Futebol") ;
+		  combo.deselectByVisibleText("O que eh esporte?");
+	     
+		  List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
+		 Assert.assertEquals(3,allSelectedOptions.size());
 
 }
-}	
+
+}
+   
+   
+   
+   
+   
+   
