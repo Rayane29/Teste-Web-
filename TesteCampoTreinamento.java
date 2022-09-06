@@ -15,11 +15,6 @@ import net.bytebuddy.dynamic.loading.ClassInjector.UsingInstrumentation.Target;
 
 public class TesteCampoTreinamento {
 
-	
-
-	
-
-
 
 	@Test
 	public void testeTextfield() {
@@ -58,7 +53,6 @@ Assert.assertEquals("meu primeiro teste",navegador.findElement(By.id("elementosF
 		navegador.quit();
 	}
 
-
 	@Test
 	public void deveinteragirComCheckbok() {
 		System.setProperty("webdriver.chrome.driver",
@@ -70,6 +64,7 @@ Assert.assertEquals("meu primeiro teste",navegador.findElement(By.id("elementosF
 		navegador.quit();
 		
 	}	
+	
 	  @Test
 	  
 	public void deveinteragirComCombo() {
@@ -95,7 +90,7 @@ Assert.assertEquals("meu primeiro teste",navegador.findElement(By.id("elementosF
 		    List<WebElement> options = combo.getOptions();
 		    Assert.assertEquals(8, options.size());
 		  
-		   
+		 
 		    boolean encontrou = false;
 		    for(WebElement option: options) {
 		    	if(option.getText().equals("Mestrado")) {
@@ -104,11 +99,11 @@ Assert.assertEquals("meu primeiro teste",navegador.findElement(By.id("elementosF
 		    		
 		    	}
 		    }
-	      
-		  Assert.assertTrue(encontrou);}
+	Assert.assertTrue(encontrou);  }
 	
-   @Test
-       
+
+	
+@Test    
    public void deveVerificarValoresComboMultiplo() {
 		  System.setProperty("webdriver.chrome.driver",
 					"C:\\Users\\Rayane\\Documents\\drivers\\chromeDriver\\chromedriver.exe");
@@ -116,19 +111,27 @@ Assert.assertEquals("meu primeiro teste",navegador.findElement(By.id("elementosF
 			navegador.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 			WebElement element = navegador.findElement(By.id("elementosForm:esportes"));
 		  Select combo = new Select(element);
-		  combo.deselectByVisibleText("Natacao");
-		  combo.deselectByVisibleText("Futebol") ;
-		  combo.deselectByVisibleText("O que eh esporte?");
-	     
-		  List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
-		 Assert.assertEquals(3,allSelectedOptions.size());
-
+		  combo.selectByVisibleText("Natacao");
+		  combo.selectByVisibleText("Corrida") ;
+		  combo.selectByVisibleText("O que eh esporte?");
+	    
+		List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
+       Assert.assertEquals(3, allSelectedOptions.size());
+	      navegador.quit();
 }
 
+@Test
+
+public void deveInteragirComBotoes() {
+	System.setProperty("webdriver.chrome.driver",
+			"C:\\Users\\Rayane\\Documents\\drivers\\chromeDriver\\chromedriver.exe");
+	ChromeDriver navegador = new ChromeDriver();
+	navegador.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+	WebElement botao = navegador.findElement(By.id("buttonSimple"));
+	botao.click();
+
+	Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
+
 }
-   
-   
-   
-   
-   
-   
+	
+}
