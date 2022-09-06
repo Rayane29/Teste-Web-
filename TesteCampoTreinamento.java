@@ -101,8 +101,6 @@ Assert.assertEquals("meu primeiro teste",navegador.findElement(By.id("elementosF
 		    }
 	Assert.assertTrue(encontrou);  }
 	
-
-	
 @Test    
    public void deveVerificarValoresComboMultiplo() {
 		  System.setProperty("webdriver.chrome.driver",
