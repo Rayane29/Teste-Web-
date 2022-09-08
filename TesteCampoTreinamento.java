@@ -129,7 +129,7 @@ public void deveInteragirComBotoes() {
 	botao.click();
 
 	Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
-
+      navegador.quit();
 }
 	
 }
